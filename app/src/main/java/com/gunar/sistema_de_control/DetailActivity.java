@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
@@ -23,6 +24,10 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void retornar(View view){
+        finish();
+    }
+
+    public void reset(View view){
         finish();
     }
 }

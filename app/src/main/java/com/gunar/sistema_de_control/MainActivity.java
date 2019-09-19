@@ -19,7 +19,7 @@ import java.io.FileReader;
 public class MainActivity extends AppCompatActivity {
 
 
-String contenido = "", nombreCompleto = "";
+String contenido = "", nombreCompleto = "", carnet="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,14 @@ String contenido = "", nombreCompleto = "";
 
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras != null) {
+                carnet = extras.getString("carnet");
+                buscar(null);
 
+            }
+        }
 
     }
 
@@ -45,9 +52,15 @@ String contenido = "", nombreCompleto = "";
         }
 
         try {
-
             EditText ci = (EditText) findViewById(R.id.carnet);
             String ciText = ci.getText().toString();
+
+            if(!carnet.equals("")){
+                ciText = carnet;
+                ci.setText(ciText);
+
+            }
+
 
 
 
@@ -132,6 +145,13 @@ String contenido = "", nombreCompleto = "";
 
     public void enviarDatos(View view) {
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("nombreCompleto", nombreCompleto);
+        intent.putExtra("contenido", contenido);
+        startActivity(intent);
+    }
+
+    public void llevar(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
         intent.putExtra("nombreCompleto", nombreCompleto);
         intent.putExtra("contenido", contenido);
         startActivity(intent);
